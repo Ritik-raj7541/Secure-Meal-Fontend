@@ -1,6 +1,7 @@
 import React from 'react'
 
 const MealTable = ({ mealChart }) => {
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"] ;
     return (
         <div className='py-12'>
             <table>
@@ -16,7 +17,7 @@ const MealTable = ({ mealChart }) => {
                 <tbody>
                     {mealChart.map((meal, index) => (
                         <tr key={index} className={index % 2 === 0 ? 'even' : 'odd'}>
-                            <th>{meal.day}</th>
+                            <th>{days[index]}</th>
                             <td>{meal.breakfast}</td>
                             <td>{meal.lunch}</td>
                             <td>{meal.snacks}</td>
