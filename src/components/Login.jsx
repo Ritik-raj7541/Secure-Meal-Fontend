@@ -46,7 +46,7 @@ const Login = ({ toggleRegistration }) => {
   const handleLogin = async (e) => {
     e.preventDefault();
     // Add authentication logic here (not implemented in this example)
-    const hostel = username.substring(0,6) ;
+    const hostel = username.substring(0,5) ;
     if(hostel.toLowerCase() === 'btech'){
       userLogin() ;
     }
@@ -54,7 +54,7 @@ const Login = ({ toggleRegistration }) => {
       adminLogin() ;
     }
     // console.log(response);
-    console.log("Logging in with:", { username, password });
+    // console.log("Logging in with:", { username, password });
   };
 
   return (
