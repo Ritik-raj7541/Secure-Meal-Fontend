@@ -8,14 +8,13 @@ import Coupons from './screens/User/Coupons';
 import MealChart from './screens/User/MealChart';
 import Complains from './screens/User/Complains';
 import Contacts from './screens/User/Contacts';
-import SignIn from './screens/SignIn';
 import PopupBox from './components/PopupBox';
+import Home from './screens/Home';
 
 function App() {
 
   return (
     <Routes>
-      <Route exact path="/" Component={SignIn} ></Route>
       {/* <Route exact path="/dashboard" Component={Dashboard} ></Route> */}
       <Route exact path="/coupons" Component={Coupons} ></Route>
       <Route exact path="/mealchart" Component={MealChart} ></Route>
@@ -24,6 +23,7 @@ function App() {
       <Route exact path="/popup" Component={PopupBox} ></Route>
       <Route exact path="/user-dashboard" Component={UserDashboard} ></Route>
       <Route exact path="/admin-dashboard" Component={AdminDashboard} ></Route>
+      <Route exact path="/" Component={Home} ></Route>
 
     </Routes>
       
