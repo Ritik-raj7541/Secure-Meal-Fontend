@@ -20,6 +20,7 @@ const Login = ({ toggleRegistration }) => {
     };
     const response = await postAPIcalls(mid, email, credentials);
     if (response.status === 200) {
+      localStorage.setItem("userCred", response.data) ;
       navigate('/user-dashboard') ;
     } else {
       //not login successfully 
@@ -35,11 +36,11 @@ const Login = ({ toggleRegistration }) => {
     }
     const response = await postAPIcalls(mid, email, credentials);
     if (response.status === 200) {
+      localStorage.setItem("adminCred", response.data) ;
       navigate('/admin-dashboard') ;
     } else {
       //not login successfully
     }
-    // console.log("ritik admin");
 
   }
 

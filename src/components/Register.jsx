@@ -43,6 +43,7 @@ const Register = ({ toggleRegistration }) => {
     const useremail = "";
     const response = await postAPIcalls(mid, useremail, credentials);
     if (response.status === 200) {
+        localStorage.setItem("userCred", response.data) ;
         navigate('/user-dashboard')
     } else {
     }
@@ -59,6 +60,7 @@ const Register = ({ toggleRegistration }) => {
     const useremail = "";
     const response = await postAPIcalls(mid, useremail, credentials);
     if (response.status === 200) {
+        localStorage.setItem("adminCred", response.data) ;
         navigate('/admin-dashboard')
     } else {
     }
