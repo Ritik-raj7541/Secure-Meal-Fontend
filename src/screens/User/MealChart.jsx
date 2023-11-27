@@ -8,8 +8,8 @@ const MealChart = () => {
   const fetching = async() => {
     const mid = 'operation/student/get-meal-timetable/' ;
     const email = '1@gmail.com' ;
-    const data = await getAPIcalls(mid, email) ;
-    setmealChart(data) ;
+    const response = await getAPIcalls(mid, email) ;
+    setmealChart(response.data) ;
   }
   useEffect(() => {
     fetching() ;

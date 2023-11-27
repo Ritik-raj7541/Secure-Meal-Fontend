@@ -1,16 +1,60 @@
 // Login.js
 
-import React, { useState } from 'react';
-import { FiUser, FiLock } from 'react-icons/fi';
+import React, { useState } from "react";
+import { FiUser, FiLock } from "react-icons/fi";
+import { postAPIcalls } from "../utils/apiCalls";
+import { useNavigate } from "react-router-dom";
 
 const Login = ({ toggleRegistration }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  let navigate = useNavigate() ;
 
-  const handleLogin = (e) => {
+  const userLogin = async (e) =>{
+    const mid = "auth/student/login";
+    const email = "";
+
+    const credentials = {
+      email: username,
+      password,
+    };
+    const response = await postAPIcalls(mid, email, credentials);
+    if (response.status === 200) {
+      navigate('/user-dashboard') ;
+    } else {
+      //not login successfully 
+    }
+  }
+
+  const adminLogin = async (e) =>{
+    const mid = "auth/admin/login" ;
+    const email = '' ;
+    const credentials = {
+      email: username,
+      password,
+    }
+    const response = await postAPIcalls(mid, email, credentials);
+    if (response.status === 200) {
+      navigate('/admin-dashboard') ;
+    } else {
+      //not login successfully
+    }
+    // console.log("ritik admin");
+
+  }
+
+  const handleLogin = async (e) => {
     e.preventDefault();
     // Add authentication logic here (not implemented in this example)
-    console.log('Logging in with:', { username, password });
+    const hostel = username.substring(0,6) ;
+    if(hostel.toLowerCase() === 'btech'){
+      userLogin() ;
+    }
+    else{
+      adminLogin() ;
+    }
+    // console.log(response);
+    console.log("Logging in with:", { username, password });
   };
 
   return (
@@ -18,7 +62,10 @@ const Login = ({ toggleRegistration }) => {
       <div className="mb-4">
         <div className="flex items-center mb-2">
           <FiUser className="text-gray-500 mr-2" />
-          <label className="block text-gray-700 text-sm font-bold" htmlFor="username">
+          <label
+            className="block text-gray-700 text-sm font-bold"
+            htmlFor="username"
+          >
             Username
           </label>
         </div>
@@ -33,7 +80,10 @@ const Login = ({ toggleRegistration }) => {
       <div className="mb-4">
         <div className="flex items-center mb-2">
           <FiLock className="text-gray-500 mr-2" />
-          <label className="block text-gray-700 text-sm font-bold" htmlFor="password">
+          <label
+            className="block text-gray-700 text-sm font-bold"
+            htmlFor="password"
+          >
             Password
           </label>
         </div>
@@ -52,7 +102,7 @@ const Login = ({ toggleRegistration }) => {
         Login
       </button>
       <p className="mt-4 text-sm">
-        Don't have an account?{' '}
+        Don't have an account?{" "}
         <span
           className="text-indigo-600 cursor-pointer"
           onClick={toggleRegistration}

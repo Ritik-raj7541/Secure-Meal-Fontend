@@ -5,7 +5,14 @@ export const getAPIcalls = async (mid, email) =>{
       const baseURL = import.meta.env.VITE_API_URL
       const url = baseURL+mid+email ;
       const response = await axios.get(url) ;
-      return response.data ;
+      return response ;
+  }
+
+  export const postAPIcalls = async (mid, email, credentials) =>{
+    const baseURL = import.meta.env.VITE_API_URL
+    const url = baseURL+mid+email ;
+    const response = await axios.post(url, credentials) ;
+    return response ;
   }
 
 
