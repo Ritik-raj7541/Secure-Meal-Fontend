@@ -1,26 +1,34 @@
 import { useState } from 'react'
 import './App.css'
-import Login from './screens/Login'
-import Register from './screens/Register'
-import Home from './screens/Home'
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import AdminLandingPage from './screens/AdminLandingPage'
-import StudentLandingPage from './screens/StudentLandingPage'
+import Navbar from './components/Navbar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import UserDashboard from './screens/User/UserDashboard';
+import AdminDashboard from './screens/Admin/AdminDashboard';
+import Coupons from './screens/User/Coupons';
+import MealChart from './screens/User/MealChart';
+import Complains from './screens/User/Complains';
+import Contacts from './screens/User/Contacts';
+import SignIn from './screens/SignIn';
+import PopupBox from './components/PopupBox';
 
 function App() {
 
   return (
-    < BrowserRouter >
-      <Routes>
-        <Route exact path="/" element={<Home></Home>} />
-        <Route exact path="/login" element={<Login></Login>} />
-        <Route exact path="/register" element={ <Register/>} />
-        <Route exact path="/student-landing-page" element={ <StudentLandingPage/>} />
-        <Route exact path="/admin-landing-page" element={ <AdminLandingPage/>} />
-    
-      </Routes>
+    <Routes>
+      <Route exact path="/" Component={SignIn} ></Route>
+      {/* <Route exact path="/dashboard" Component={Dashboard} ></Route> */}
+      <Route exact path="/coupons" Component={Coupons} ></Route>
+      <Route exact path="/mealchart" Component={MealChart} ></Route>
+      <Route exact path="/complains" Component={Complains} ></Route>
+      <Route exact path="/contacts" Component={Contacts} ></Route>
+      <Route exact path="/popup" Component={PopupBox} ></Route>
+      <Route exact path="/user-dashboard" Component={UserDashboard} ></Route>
+      <Route exact path="/admin-dashboard" Component={AdminDashboard} ></Route>
 
-    </ BrowserRouter >
+    </Routes>
+      
+    
+
   )
 }
 
