@@ -20,7 +20,7 @@ const Login = ({ toggleRegistration }) => {
     };
     const response = await postAPIcalls(mid, email, credentials);
     if (response.status === 200) {
-      localStorage.setItem("userCred", JSON.stringify(response.data)) ;
+      localStorage.setItem("cred", JSON.stringify(response.data)) ;
       navigate('/user-dashboard') ;
     } else {
       //not login successfully 
@@ -36,8 +36,8 @@ const Login = ({ toggleRegistration }) => {
     }
     const response = await postAPIcalls(mid, email, credentials);
     if (response.status === 200) {
-      localStorage.setItem("adminCred", JSON.stringify(response.data)) ;
-      navigate('/admin-dashboard') ;
+      localStorage.setItem("cred", JSON.stringify(response.data)) ;
+      navigate('/user-dashboard') ;
     } else {
       //not login successfully
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../components/Navbar';
 import { RiCoupon3Line } from 'react-icons/ri';
 import Button from '../../components/Button';
@@ -48,7 +48,15 @@ const Coupons = () => {
     },
   ];
 
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(() => {
+    console.log(JSON.parse(localStorage.getItem("cred")).admin);
+    JSON.parse(localStorage.getItem("cred")).admin;
+  });
+
+  useEffect(() => {
+    setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin)
+  }, [])
+  
 
   const [formData, setFormData] = useState({
     mealOneS: '',
@@ -72,226 +80,166 @@ const Coupons = () => {
     console.log(JSON.stringify(formData, null, 2));
   };
 
+  const handleTest = () => {
+    console.log(localStorage.getItem(cred));
+  }
+
   return (
 
-    <div className='flex '>
-      <div className=''>
-        {/* Set the height of the SideNavbar to 100% */}
-        <div className=''>
-          <SideNavbar />
-        </div>
-      </div>
-      <div className=''>
+    <div className="flex h-screen overflow-hidden pb-4">
+      <SideNavbar />
+      <div className="flex flex-col flex-1 lg:overflow-hidden">
         <Navbar />
-        <div className='text-left text-2xl'>
-          <div className='m-4'>Your Coupons</div>
-        </div>
-        {isAdmin ? <CouponSlider
-          images={[
-            {
-              url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-              meal: 'Breakfast',
-            },
-            {
-              url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-              meal: 'Lunch',
-            },
-            {
-              url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-              meal: 'Snacks',
-            },
-            {
-              url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-              meal: 'Dinner',
-            },
-          ]}
-        />
-          :
-
-          <div>
-            <div className='text-2xl'>Generate Meal</div>
-            <div className='flex justify-center items-center text px-16 '>
-              <form action="">
-                <div className="grid grid-cols-1 items-center">
-                  <label>Breakfast</label>
-                  <div className='grid grid-cols-2'>
-                    <div>
-                      <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
-                      <input
-                        type="time"
-                        id="mealOneS"
-                        name="mealOneS"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealOne', 'S', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
-                      <input
-                        type="time"
-                        id="mealOneE"
-                        name="mealOneE"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealOne', 'E', e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <label>Lunch</label>
-                  <div className='grid grid-cols-2'>
-                    <div>
-                      <label htmlFor="mealTwoS" className="mb-2">Select start time:</label>
-                      <input
-                        type="time"
-                        id="mealTwoS"
-                        name="mealTwoS"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealTwo', 'S', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="mealTwoE" className="mb-2">Select end time:</label>
-                      <input
-                        type="time"
-                        id="mealTwoE"
-                        name="mealTwoE"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealTwo', 'E', e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <label>Snacks</label>
-                  <div className='grid grid-cols-2'>
-                    <div>
-                      <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
-                      <input
-                        type="time"
-                        id="mealOneS"
-                        name="mealOneS"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealThree', 'S', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
-                      <input
-                        type="time"
-                        id="mealOneE"
-                        name="mealOneE"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealThree', 'E', e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <label>Dinner</label>
-                  <div className='grid grid-cols-2'>
-                    <div>
-                      <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
-                      <input
-                        type="time"
-                        id="mealOneS"
-                        name="mealOneS"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealFour', 'S', e.target.value)}
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
-                      <input
-                        type="time"
-                        id="mealOneE"
-                        name="mealOneE"
-                        className="border p-2 mb-4"
-                        onChange={(e) => handleInputChange('mealFour', 'E', e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-
-                  {/* Repeat similar structure for mealThree and mealFour sections */}
-
-                  <button
-                    type="button"
-                    onClick={generateJSON}
-                    className="bg-green-400 text-white px-4 py-2"
-                  >
-                    Generate
-                  </button>
-                </div>
-              </form>
-            </div>
+        <div className="flex-1  overflow-y-auto bg-gray-200 py-16 px-4 ">
+          <div className='text-right text-3xl font-bold mx-4 lg:mb-0 mb-16'>
+            <div >Your Coupons</div>
           </div>
+          {isAdmin===true ?
+            (
+              
+            <div>
+              <div className='text-2xl font-bold mb-8'>Generate Meal</div>
+              <div className='flex justify-center items-center text px-8 '>
+                <form action="">
+                  <div className="grid grid-cols-1 items-center">
+                    <label className='text-xl font-bold'>Breakfast</label>
+                    <div className='grid grid-cols-2 gap-24'>
+                      <div>
+                        <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
+                        <input
+                          type="time"
+                          id="mealOneS"
+                          name="mealOneS"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealOne', 'S', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
+                        <input
+                          type="time"
+                          id="mealOneE"
+                          name="mealOneE"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealOne', 'E', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <label className='text-xl font-bold'>Lunch</label>
+                    <div className='grid grid-cols-2 gap-24'>
+                      <div>
+                        <label htmlFor="mealTwoS" className="mb-2">Select start time:</label>
+                        <input
+                          type="time"
+                          id="mealTwoS"
+                          name="mealTwoS"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealTwo', 'S', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="mealTwoE" className="mb-2">Select end time:</label>
+                        <input
+                          type="time"
+                          id="mealTwoE"
+                          name="mealTwoE"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealTwo', 'E', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <label className='text-xl font-bold'>Snacks</label>
+                    <div className='grid grid-cols-2 gap-24'>
+                      <div>
+                        <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
+                        <input
+                          type="time"
+                          id="mealOneS"
+                          name="mealOneS"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealThree', 'S', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
+                        <input
+                          type="time"
+                          id="mealOneE"
+                          name="mealOneE"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealThree', 'E', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <label className='text-xl font-bold'>Dinner</label>
+                    <div className='grid grid-cols-2 gap-24'>
+                      <div>
+                        <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
+                        <input
+                          type="time"
+                          id="mealOneS"
+                          name="mealOneS"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealFour', 'S', e.target.value)}
+                        />
+                      </div>
+                      <div>
+                        <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
+                        <input
+                          type="time"
+                          id="mealOneE"
+                          name="mealOneE"
+                          className="border p-2 mb-4"
+                          onChange={(e) => handleInputChange('mealFour', 'E', e.target.value)}
+                        />
+                      </div>
+                    </div>
 
 
-          // <div>
-          //   <div className='text-2xl'>
-          //     Generate Meal
-          //   </div>
-          //   <div className='flex justify-center items-center text px-16 '>
+                    {/* Repeat similar structure for mealThree and mealFour sections */}
 
-          //     <form action="">
-          //       <div className="grid grid-cols-1 items-center  ">
-          //         <label>Breakfast</label>
-          //         <div className='grid grid-cols-2'>
-          //           <div>
-          //             <label htmlFor="start" className="mb-2">Select start time:</label>
-          //             <input type="time" id="start" name="startTime" className="border p-2 mb-4" />
-          //           </div>
-          //           <div>
-          //             <label htmlFor="end" className="mb-2">Select end time:</label>
-          //             <input type="time" id="end" name="endTime" className="border p-2 mb-4" />
-          //           </div>
-          //         </div>
+                    <button
+                      type="button"
+                      onClick={generateJSON}
+                      className=" px-4 py-2 rounded-lg  bg-green-500 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
+                    >
+                      Generate
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+            )
+            :
 
-          //         <label>Lunch</label>
-          //         <div className='grid grid-cols-2'>
-          //           <div>
-          //             <label htmlFor="start" className="mb-2">Select start time:</label>
-          //             <input type="time" id="start" name="startTime" className="border p-2 mb-4" />
-          //           </div>
-          //           <div>
-          //             <label htmlFor="end" className="mb-2">Select end time:</label>
-          //             <input type="time" id="end" name="endTime" className="border p-2 mb-4" />
-          //           </div>
-          //         </div>
-
-
-          //         <label>Snacks</label>
-          //         <div className='grid grid-cols-2'>
-          //           <div>
-          //             <label htmlFor="start" className="mb-2">Select start time:</label>
-          //             <input type="time" id="start" name="startTime" className="border p-2 mb-4" />
-          //           </div>
-          //           <div>
-          //             <label htmlFor="end" className="mb-2">Select end time:</label>
-          //             <input type="time" id="end" name="endTime" className="border p-2 mb-4" />
-          //           </div>
-          //         </div><label>Dinner</label>
-          //         <div className='grid grid-cols-2'>
-          //           <div>
-          //             <label htmlFor="start" className="mb-2">Select start time:</label>
-          //             <input type="time" id="start" name="startTime" className="border p-2 mb-4" />
-          //           </div>
-          //           <div>
-          //             <label htmlFor="end" className="mb-2">Select end time:</label>
-          //             <input type="time" id="end" name="endTime" className="border p-2 mb-4" />
-          //           </div>
-          //         </div>
+            (<CouponSlider
+              images={[
+                {
+                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
+                  meal: 'Breakfast',
+                },
+                {
+                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
+                  meal: 'Lunch',
+                },
+                {
+                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
+                  meal: 'Snacks',
+                },
+                {
+                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
+                  meal: 'Dinner',
+                },
+              ]}
+            />)
 
 
+          }
+        </div>
 
-          //         <Button value="Generate" type="submit" className="bg-green-400 text-white px-4 py-2" />
-          //       </div>
-          //     </form>
-          //   </div>
-          // </div>
-
-
-        }
-
-        {/* <PopupBox /> */}
       </div>
     </div>
   );

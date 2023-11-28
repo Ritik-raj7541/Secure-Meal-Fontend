@@ -8,7 +8,7 @@ const Button = React.forwardRef((props) => {
     // }
 
     return (
-        <button type={props.type} form={props.form}  className={`inline-flex items-center p-2 ${props.className} hover:bg-gray-300 text-sm font-medium rounded-md shadow-sm`} onClick={props.onClick} value={props.value} >
+        <button type={props.type} form={props.form}  className={`inline-flex items-center p-2 ${props.className} focus:${props.focus} hover:${props.hover} text-sm font-medium rounded-md shadow-sm `} onClick={props.onClick} value={props.value} >
             {props.value}
         </button>
     )

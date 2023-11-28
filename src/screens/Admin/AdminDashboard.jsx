@@ -62,7 +62,7 @@ const AdminDashboard = () => {
               <QrCodeScanner />
               {/* Add your QR code scanning logic or any other content */}
               <button
-                className="bg-red-500 text-white px-4 py-2 rounded mt-4"
+                className="px-4 py-2 rounded mt-4 bg-red-400 text-white hover:bg-red-500 focus:ring-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                 onClick={closeScanQrCodePopup}
               >
                 Close Popup
