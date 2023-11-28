@@ -3,6 +3,7 @@ import { IoCheckbox } from 'react-icons/io5';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import Button from './Button';
+import QrCodeScanner from "./QrCodeScanner"
 
 const PopupBox = (props) => {
     return (
@@ -16,6 +17,7 @@ const PopupBox = (props) => {
                             <div className='modal'>
                                 <div className='content'>
                                     <div className='rounded-md'>
+
                                         <form className='px-2' id='generate-meal-form'>
 
                                             <label>Breakfast
