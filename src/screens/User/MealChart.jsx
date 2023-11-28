@@ -7,7 +7,8 @@ const MealChart = () => {
   const [mealChart, setmealChart] = useState([])
   const fetching = async() => {
     const mid = 'operation/student/get-meal-timetable/' ;
-    const email = '1@gmail.com' ;
+    const email = JSON.parse(localStorage.getItem("userCred")).email ;
+    // console.log(email);
     const response = await getAPIcalls(mid, email) ;
     setmealChart(response.data) ;
   }
