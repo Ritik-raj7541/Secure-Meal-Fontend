@@ -69,7 +69,7 @@ export const Navbar = () => {
 
 
     return (
-        <div className="px-3 py-3 lg:py-2  w-full bg-stone-100 z-50 fixed ">
+        <div className="px-3 py-3 lg:py-2  w-full bg-stone-100  fixed ">
             
             <nav className="flex justify-between" >
             <HiOutlineMenuAlt1
@@ -86,7 +86,7 @@ export const Navbar = () => {
                       }
                 >
                     
-                    <div className=" shadow-lg bg-white text-left  justify-between  px-2 rounded-lg w-72 border-solid border-2 border-black block  h-full">
+                    <div className=" shadow-lg bg-white text-left  justify-between  px-2 rounded-lg w-72 border-solid border-1 border-black block  h-full">
                     <div className="text-center">
                     <HiOutlineMenuAlt1 onClick={() => setMenu(false)} className="relative z-50 flex items-center cursor-pointer text-3xl left-60" />
                         <div className="text-2xl mb-10">Secure Meal</div>
@@ -96,7 +96,7 @@ export const Navbar = () => {
                                     key={i}
                                     className={`block rounded-lg m-2 p-4 w-64 text-center ${
                                         activeLink === d.link
-                                            ? "bg-black text-white"
+                                            ? "px-4 py-2 rounded-lg  bg-gray-700 text-base font-medium text-white hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-stone-500"
                                             : "hover:text-black"
                                     }`}
                                     to={d.link}
