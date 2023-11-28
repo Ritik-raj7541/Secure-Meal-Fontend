@@ -7,6 +7,7 @@ import CouponsCarousel from '../../components/CouponsCarousel';
 import CouponSlider from '../../components/CouponSlider';
 import SideNavbar from '../../components/SideNavbar';
 import TimePicker from 'react-time-picker';
+import { postAPIcalls } from '../../utils/apiCalls';
 
 const Coupons = () => {
   const breakfast = () => {
@@ -76,8 +77,15 @@ const Coupons = () => {
     }));
   };
 
-  const generateJSON = () => {
-    console.log(JSON.stringify(formData, null, 2));
+  const generateJSON = async() => {
+    const mid = 'operation/admin/set-time/' ;
+    const email = JSON.parse(localStorage.getItem("cred")).email ;
+    const response = await postAPIcalls(mid, email, formData) ;
+    if(response.status===200){
+      console.log("good");
+    }else{
+      console.log("bad");
+    }
   };
 
   const handleTest = () => {
