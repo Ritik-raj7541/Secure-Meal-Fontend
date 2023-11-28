@@ -4,42 +4,38 @@ import Button from "./Button";
 import { postAPIcalls } from "../utils/apiCalls";
 
 const QrCodeScanner = () => {
-  const previewStyle = {
-    height: 320,
-    width: 320,
-    position: "relative",
-    marginLeft: "auto",
-    marginRight: "auto",
+  const containerStyle = {
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
   };
 
-  const containerStyle = {
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // minHeight: '100vh',
-    // display: 'block',
-    // alignItems: 'center',
+  const previewStyle = {
+    width: "100%",
+    height: "100%",
+    position: "relative",
   };
 
   const [result, setResult] = useState({ data: "Scanning..." });
   const [delay, setDelay] = useState(500);
   const [error, setError] = useState(null);
-  const [credentials, setcredentials] = useState({});
+  const [credentials, setCredentials] = useState({});
 
   const setting = async () => {
     const data = JSON.parse(result.data);
-    setcredentials(data);
+    setCredentials(data);
   };
+
   const fetching = async () => {
     const mid = "operation/admin/verify-student/";
-    // console.log(credentials.studentDetails.email);
     const useremail = credentials.studentDetails.email;
     const response = await postAPIcalls(mid, useremail, credentials);
-    if(response.status === 200){
-        console.log("good");
-    }else{
-        console.log("bad");
+    if (response.status === 200) {
+      console.log("good");
+    } else {
+      console.log("bad");
     }
   };
 
@@ -51,7 +47,6 @@ const QrCodeScanner = () => {
 
   useEffect(() => {
     setResult(result);
-    // console.log(delay);
     if (result.data !== "Scanning...") setting();
   }, [result]);
 
@@ -77,14 +72,14 @@ const QrCodeScanner = () => {
   };
 
   return (
-    <div style={containerStyle}>
+    <div className="h-full w-full" style={containerStyle}>
       <div style={previewStyle}>
         {error ? (
           <p>{error}</p>
         ) : (
           <QrReader
             delay={delay}
-            style={{ width: "100%", height: 320 }}
+            style={{ width: "100%", height: "100%" }}
             onError={handleError}
             onScan={handleScan}
             constraints={{
@@ -93,8 +88,7 @@ const QrCodeScanner = () => {
           />
         )}
       </div>
-      <p>{result.data}</p>
-      <Button value="Scan" handleClick={handleClick} className="bg-gray-300" />
+      <p>Scanning...</p>
     </div>
   );
 };
