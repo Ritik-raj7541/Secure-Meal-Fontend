@@ -21,13 +21,13 @@ const ReviewModal = ({ reviewDetails, onClose, onEdit }) => {
           <div className='text-gray-600'>{reviewDetails.date}</div>
         </div>
         <div className="mb-4">
-          <div className='flex justify-between'>
-            <div>{reviewDetails.ratings}</div>
-            <Button
+          <div className='flex justify-center'>
+            <div className=''>{reviewDetails.ratings}</div>
+            {/* <Button
               value="Edit"
               className="bg-blue-500 text-white hover:bg-blue-600 focus:ring-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 ml-2"
               onClick={handleEdit}
-            />
+            /> */}
           </div>
           <div>{reviewDetails.review}</div>
         </div>
