@@ -9,6 +9,7 @@ import { GiMeal } from "react-icons/gi";
 import { FaNotEqual } from "react-icons/fa6";
 import { TiContacts } from "react-icons/ti";
 import { RiHome2Line } from "react-icons/ri";
+import { MdOutlineRateReview } from "react-icons/md";
 import {
   HomeIcon,
   UserCircleIcon,
@@ -41,6 +42,11 @@ export const Navbar = () => {
             icon: <GiMeal className="text-xl mx-2" />,
         },
         {
+            label: "Reviews",
+            link: "/reviews",
+            icon: <MdOutlineRateReview className="text-xl mx-2" />,
+        },
+        {
             label: "Complains",
             link: "/complains",
             icon: <FaNotEqual className="text-xl mx-2" />,
@@ -69,9 +75,9 @@ export const Navbar = () => {
 
 
     return (
-        <div className="px-3 py-3 lg:py-2  w-full bg-stone-100  fixed ">
+        <div className="px-3 py-3 lg:py-2  w-full bg-stone-100  fixed lg:z-0 z-50">
             
-            <nav className="flex justify-between" >
+            <nav className="flex justify-between " >
             <HiOutlineMenuAlt1
                             onClick={() => setMenu(true)}
                             className="text-3xl cursor-pointer lg:hidden"
@@ -81,7 +87,7 @@ export const Navbar = () => {
                 {/* sidebar mobile menu */}
                 <div
                     className={
-                        "sidebar shadow-xl left-0 text-whitez-1 ease-in-out duration-300 fixed h-full w-full  bg-black/50 backdrop-blur-sm top-0 right-0 " +
+                        " sidebar shadow-xl left-0 text-whitez-1 ease-in-out duration-300 fixed h-full w-full  bg-black/50 backdrop-blur-sm top-0 right-0 " +
                         (isSideMenuOpen ? "translate-x-0 transition-all" : "-translate-x-full") 
                       }
                 >

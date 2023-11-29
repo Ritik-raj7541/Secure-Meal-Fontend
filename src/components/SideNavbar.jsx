@@ -5,6 +5,7 @@ import { RiCoupon3Line } from "react-icons/ri";
 import { GiMeal } from "react-icons/gi";
 import { FaNotEqual } from "react-icons/fa6";
 import { TiContacts } from "react-icons/ti";
+import { MdOutlineRateReview } from "react-icons/md";
 import Button from "./Button";
 
 export const SideNavbar = () => {
@@ -36,6 +37,11 @@ export const SideNavbar = () => {
             label: "Meal Chart",
             link: "/mealchart",
             icon: <GiMeal className="text-xl mx-2" />,
+        },
+        {
+            label: "Reviews",
+            link: "/reviews",
+            icon: <MdOutlineRateReview className="text-xl mx-2" />,
         },
         {
             label: "Complains",
