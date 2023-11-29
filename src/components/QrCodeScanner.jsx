@@ -72,7 +72,7 @@ const QrCodeScanner = () => {
   };
 
   return (
-    <div className="h-full w-full" style={containerStyle}>
+    <div className="lg:h-1/2 h-full w-full" style={containerStyle}>
       <div style={previewStyle}>
         {error ? (
           <p>{error}</p>
