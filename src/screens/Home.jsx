@@ -12,16 +12,13 @@ const Home = () => {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-white p-8 rounded shadow-md">
-        <h2 className="text-2xl font-bold mb-4">{isRegistered ? <div>Register</div> :<div>Log In</div>}</h2>
+      <div className="">
         {isRegistered ? (
           <Register toggleRegistration={toggleRegistration} />
         ) : (
           <Login toggleRegistration={toggleRegistration} />
         )}
       </div>
-    </div>
   );
 };
 
