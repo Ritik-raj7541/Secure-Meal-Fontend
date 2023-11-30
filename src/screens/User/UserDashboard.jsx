@@ -6,32 +6,42 @@ import { LuUserCircle2 } from "react-icons/lu";
 import QrCodeScanner from "../../components/QrCodeScanner";
 import Loading from "../../components/Loading";
 import Close from "../../components/close";
+import Check from "../../components/Check";
+// import Close from "../../components/Close";
 
 
 const UserDashboard = () => {
 
     const [isScanQrCodePopupOpen, setScanQrCodePopupOpen] = useState(false);
 
-  const openScanQrCodePopup = () => {
-    setScanQrCodePopupOpen(true);
-  };
+    const openScanQrCodePopup = () => {
+        setScanQrCodePopupOpen(true);
+    };
 
-  const closeScanQrCodePopup = () => {
-    setScanQrCodePopupOpen(false);
-  };
+    const closeScanQrCodePopup = () => {
+        setScanQrCodePopupOpen(false);
+    };
 
-//   const toggleScanQrCodePopup = () => {
-//     setScanQrCodePopupOpen(!isScanQrCodePopupOpen);
-//   };
+    //   const toggleScanQrCodePopup = () => {
+    //     setScanQrCodePopupOpen(!isScanQrCodePopupOpen);
+    //   };
 
 
     const [isAdmin, setIsAdmin] = useState(JSON.parse(localStorage.getItem("cred")).admin);
 
     // console.log(JSON.parse(localStorage.getItem("userCred")).admin)
     useEffect(() => {
-      setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin)
+        setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin)
     }, [])
-    
+
+
+    const [showElement,setShowElement] = React.useState(true)
+  useEffect(()=>{
+    setTimeout(function() {
+      setShowElement(false)
+         }, 3000);
+       },
+   [])
 
     return (
         <div>
@@ -79,7 +89,7 @@ const UserDashboard = () => {
                                 >
                                     <div className="w-full h-full p-4 flex flex-col justify-center items-center">
                                         {/* Your popup content goes here */}
-                                        <QrCodeScanner/>
+                                        <QrCodeScanner />
                                         {/* Add your QR code scanning logic or any other content */}
                                         {/* <button
                                             className="px-4 py-2 rounded mt-4 bg-red-400 text-white hover:bg-red-500 focus:ring-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 "
@@ -87,10 +97,16 @@ const UserDashboard = () => {
                                         >
                                             Close Popup
                                         </button> */}
+                                        {showElement ?
+                                            <div>
+                                                {/* Your content goes here */}
+                                                <Check onClick={setShowElement(false)} />
+                                            </div> : ""
+                                        }
                                         <div onClick={closeScanQrCodePopup}>
-                                        <Close />
+                                            <Close />
                                         </div>
-                                        
+
                                     </div>
                                 </Popup>
                             </div>

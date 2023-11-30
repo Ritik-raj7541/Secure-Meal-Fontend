@@ -103,7 +103,7 @@ export const Navbar = () => {
                     <div className=" shadow-lg bg-white text-left  justify-between  px-2 rounded-lg w-72 border-solid border-1 border-black block  h-full">
                     <div className="text-center">
                     <HiOutlineMenuAlt1 onClick={() => setMenu(false)} className="relative z-50 flex items-center cursor-pointer text-3xl left-60" />
-                        <div className="text-2xl mb-10">Secure Meal</div>
+                        <div className="text-2xl mb-10">Mess Guardian</div>
                         <div>
                             {navlinks.map((d, i) => (
                                 <Link
