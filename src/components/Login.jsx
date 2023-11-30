@@ -8,8 +8,10 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [isRegistered, setIsRegistered] = useState(false);
+  const [isRegistered, setIsRegistered] = useState(true);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [correctCredentials, setCorrectCredentials] = useState(true);
+  const [registrationError, setRegistrationError] = useState(0);
   const [adminDetails, setAdminDetails] = useState({
     name: "",
     instituteId: "",
@@ -35,11 +37,17 @@ const Login = () => {
     };
     const mid = "auth/student/register";
     const useremail = "";
-    const response = await postAPIcalls(mid, useremail, credentials);
+    try {
+      const response = await postAPIcalls(mid, useremail, credentials);
     if (response.status === 200) {
       localStorage.setItem("cred", JSON.stringify(response.data));
       navigate('/user-dashboard')
-    } else {
+    } 
+    } catch (error) {
+      if (error.response.status === 401) {
+        setRegistrationError(1);
+        console.log("Ritik chutiya");
+      }
     }
   };
   const adminRegistration = async () => {
@@ -52,11 +60,18 @@ const Login = () => {
     }
     const mid = "auth/admin/register";
     const useremail = "";
-    const response = await postAPIcalls(mid, useremail, credentials);
-    if (response.status === 200) {
-      localStorage.setItem("cred", JSON.stringify(response.data));
-      navigate('/user-dashboard')
-    } else {
+    
+    try {
+      const response = await postAPIcalls(mid, useremail, credentials);
+      if (response.status === 200) {
+        localStorage.setItem("cred", JSON.stringify(response.data));
+        navigate('/user-dashboard')
+      }
+    } catch (error) {
+      if (error.response.status === 401) {
+        setRegistrationError(1);
+        console.log("RItik chutiya");
+      }
     }
     // console.log(credentials);
   };
@@ -93,13 +108,19 @@ const Login = () => {
       email: username,
       password,
     };
-    const response = await postAPIcalls(mid, email, credentials);
+    try {
+      const response = await postAPIcalls(mid, email, credentials);
     if (response.status === 200) {
       localStorage.setItem("cred", JSON.stringify(response.data));
       navigate('/user-dashboard');
-    } else {
-      //not login successfully 
+    } 
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setCorrectCredentials(false);
+        console.log("ritik is bad");
+      }
     }
+      //not login successfully     
   }
 
   const adminLogin = async (e) => {
@@ -109,13 +130,20 @@ const Login = () => {
       email: username,
       password,
     }
-    const response = await postAPIcalls(mid, email, credentials);
+    try {
+      const response = await postAPIcalls(mid, email, credentials);
     if (response.status === 200) {
       localStorage.setItem("cred", JSON.stringify(response.data));
       navigate('/user-dashboard');
-    } else {
-      //not login successfully
     }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        setCorrectCredentials(false);
+        console.log("ritik is bad");
+      }
+    }
+      //not login successfully
+    
 
   }
 
@@ -178,6 +206,10 @@ const Login = () => {
                   </svg>
                   <input class="pl-2 outline-none border-none" type="password" name="" id="" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
                 </div>
+                {
+                  correctCredentials ? "" :
+                  <div className="text-red-500">Wrong Username or Password!</div>
+                }
                 <button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-lg text-white font-semibold mb-2" onClick={handleLogin}>Login</button>
                 <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer flex justify-between"><div>Do not have account? </div>
                   <div onClick={toggleRegistration}>Register</div>
@@ -363,7 +395,13 @@ const Login = () => {
 
 
                 </div>
-
+                  {
+                    (registrationError == 1) ? <div className="text-red-500">
+                    User already Registered.
+                  </div> 
+                  : ""
+                    
+                  }
                 <button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-lg text-white font-semibold mb-2" onClick={handleRegistration}>Register</button>
                 <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer flex justify-between">
                   <div className="mx-2">Already have an account? </div>

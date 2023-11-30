@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate,  } from 'react-router-dom';
 import clsx from "clsx";
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { LuUserCircle2 } from "react-icons/lu";
@@ -18,12 +18,15 @@ import {
   ServerStackIcon,
   RectangleStackIcon,
 } from "@heroicons/react/24/solid";
+import Button from "./Button";
 
 export const Navbar = () => {
     const [isSideMenuOpen, setMenu] = useState(false);
 
     const [activeLink, setActiveLink] = useState("/user-dashboard");
     // const [showSidebar, setShowSidebar] = useState(false);
+
+    const navigate = useNavigate();
 
     const navlinks = [
         {
@@ -73,6 +76,11 @@ export const Navbar = () => {
         setActiveLink(window.location.pathname);
     }, []);
 
+    const handleLogout =  () =>{
+        localStorage.removeItem("cred");
+        navigate("/");
+}
+
 
     return (
         <div className="px-3 py-3 lg:py-2  w-full bg-stone-100  fixed lg:z-0 z-50">
@@ -115,6 +123,7 @@ export const Navbar = () => {
                                 </Link>
                             ))}
                         </div>
+                        <Button value="Logout" onClick={handleLogout}/>
                     </div>
                 </div>
                 </div>
