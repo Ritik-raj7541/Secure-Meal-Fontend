@@ -33,11 +33,18 @@ const QrCodeScanner = () => {
   const fetching = async () => {
     const mid = "operation/admin/verify-student/";
     const useremail = credentials.studentDetails.email;
-    const response = await postAPIcalls(mid, useremail, credentials);
-    if (response.status === 200) {
-      console.log("good");
-    } else {
-      console.log("bad");
+    try {
+      const response = await postAPIcalls(mid, useremail, credentials);
+      if (response.status === 200) {
+        
+      }
+    } catch (error) {
+      {
+        if(error.response.status === 401){
+          
+        }
+        
+      }
     }
   };
 
@@ -91,8 +98,6 @@ const QrCodeScanner = () => {
         )}
       </div>
       <Loading />
-      
-      
     </div>
   );
 };
