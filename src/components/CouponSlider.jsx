@@ -28,7 +28,7 @@ export default function ImageSlider({ images }) {
                     if (entry.isIntersecting) {
                         const index = slidesArray.indexOf(entry.target);
                         setCurrentSlideIndex(index);
-                        console.log(currentSlideIndex)
+                        console.log("index- ",currentSlideIndex)
                     }
                 });
             },
@@ -61,9 +61,8 @@ export default function ImageSlider({ images }) {
                         {
                             images.map((obj, index) => {
                                 return (
-                                    <div key={obj.url} className="w-full flex-shrink-0 snap-start lg:h-1/4 lg:w-1/4 round-sm shadow-lg">
-                                        {index}
-                                        <img className="justify-center" src={obj.url} />
+                                    <div key={obj.url} className="mx-4 pl-2 w-full flex-shrink-0 snap-start lg:h-1/4 lg:w-1/4 round-sm shadow-lg justify-center">
+                                       <img className="justify-center" style={{display:"block",margin:"auto"}} src={obj.url} />
                                         <div>{obj.meal}</div>
                                     </div>
                                     // <div key={obj.url}>
@@ -90,10 +89,10 @@ export default function ImageSlider({ images }) {
       </div> */}
 
 <div className="flex lg:hidden">
-                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex == 1 ? "bg-blue-300" : "bg-gray-100"}`} />
-                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex == 3 ? "bg-green-300" : "bg-gray-100"}`} />
-                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex == 5 ? "bg-yellow-300" : "bg-gray-100"}`} />
-                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex == 7 ? "bg-red-300" : "bg-gray-100"}`} />
+                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex === 1 ? "bg-blue-300" : "bg-gray-100"}`} />
+                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex === 3 ? "bg-green-300" : "bg-gray-100"}`} />
+                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex === 5 ? "bg-yellow-300" : "bg-gray-100"}`} />
+                            <div className={`h-4 w-4 rounded-full text-center mx-2 ${currentSlideIndex === 7 ? "bg-red-300" : "bg-gray-100"}`} />
                         </div>
         </div>
     );

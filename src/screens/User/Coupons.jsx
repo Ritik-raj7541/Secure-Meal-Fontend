@@ -30,25 +30,8 @@ const Coupons = () => {
   const generate = () => {
     console.log(event.target.value);
   };
-  const [images, setimages] = useState([
-    {
-      url: a,
-      meal: "Breakfast",
-    },
-    {
-      url: a,
-      meal: "Lunch",
-    },
-    {
-      url: a,
-      meal: "Snacks",
-    },
-    {
-      url: a,
-      meal: "Dinner",
-    },
-  ]);
-  const [newImage, setnewImage] = useState([]) ;
+  
+  const [newImage, setnewImage] = useState([{}]) ;
 
   const [isAdmin, setIsAdmin] = useState(() => {
     console.log(JSON.parse(localStorage.getItem("cred")).admin);
