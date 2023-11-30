@@ -18,18 +18,6 @@ const Reviews = () => {
     const [isAdmin, setIsAdmin] = useState(JSON.parse(localStorage.getItem("cred")).admin);
 
     // console.log(JSON.parse(localStorage.getItem("userCred")).admin)
-    useEffect(() => {
-        setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin);
-        setNewreview(reviews);
-    }, [])
-
-    const handleStarClick = (value) => {
-    setNewreview((prevReview) => ({
-      ...prevReview,
-      rating: value,
-    }));
-  };
-
     const userReviews = [
         {
             "meal": "user-Breakfast",
@@ -163,6 +151,20 @@ const Reviews = () => {
     ]
 
     const reviews = isAdmin ? allReviews : userReviews;
+    useEffect(() => {
+        setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin);
+        setNewreview(reviews);
+    }, [])
+
+    const handleStarClick = (value) => {
+    setNewreview((prevReview) => ({
+      ...prevReview,
+      rating: value,
+    }));
+  };
+
+   
+    
 
     const openModal = () => {
         setShowModal(true);
