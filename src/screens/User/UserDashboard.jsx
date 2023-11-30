@@ -4,6 +4,7 @@ import Popup from "reactjs-popup";
 import SideNavbar from "../../components/SideNavbar";
 import { LuUserCircle2 } from "react-icons/lu";
 import QrCodeScanner from "../../components/QrCodeScanner";
+import Loading from "../../components/Loading";
 
 
 const UserDashboard = () => {
@@ -47,7 +48,7 @@ const UserDashboard = () => {
                                         >
                                             <div className="text-md">Scan QR Code</div>
                                         </div>
-                                        {/* ... Other content ... */}
+                                        {/* <Loading /> */}
                                     </div>
 
                                     {/* ... Other content ... */}
@@ -74,12 +75,12 @@ const UserDashboard = () => {
                                         {/* Your popup content goes here */}
                                         <QrCodeScanner />
                                         {/* Add your QR code scanning logic or any other content */}
-                                        <button
+                                        {/* <button
                                             className="px-4 py-2 rounded mt-4 bg-red-400 text-white hover:bg-red-500 focus:ring-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 "
                                             onClick={closeScanQrCodePopup}
                                         >
                                             Close Popup
-                                        </button>
+                                        </button> */}
                                     </div>
                                 </Popup>
                             </div>
