@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from '../../components/Navbar';
-import { RiCoupon3Line } from 'react-icons/ri';
-import Button from '../../components/Button';
-import PopupBox from '../../components/PopupBox';
-import CouponsCarousel from '../../components/CouponsCarousel';
-import CouponSlider from '../../components/CouponSlider';
-import SideNavbar from '../../components/SideNavbar';
-import TimePicker from 'react-time-picker';
-import { postAPIcalls } from '../../utils/apiCalls';
+import React, { useState, useEffect } from "react";
+import Navbar from "../../components/Navbar";
+import { RiCoupon3Line } from "react-icons/ri";
+import Button from "../../components/Button";
+import PopupBox from "../../components/PopupBox";
+import CouponsCarousel from "../../components/CouponsCarousel";
+import CouponSlider from "../../components/CouponSlider";
+import SideNavbar from "../../components/SideNavbar";
+import TimePicker from "react-time-picker";
+import { getAPIcalls, postAPIcalls } from "../../utils/apiCalls";
+import a from '../../assets/pics/a.png'
 
 const Coupons = () => {
   const breakfast = () => {
@@ -29,25 +30,25 @@ const Coupons = () => {
   const generate = () => {
     console.log(event.target.value);
   };
-
-  const images = [
+  const [images, setimages] = useState([
     {
-      url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-      meal: 'Breakfast',
+      url: a,
+      meal: "Breakfast",
     },
     {
-      url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-      meal: 'Lunch',
+      url: a,
+      meal: "Lunch",
     },
     {
-      url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-      meal: 'Snacks',
+      url: a,
+      meal: "Snacks",
     },
     {
-      url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-      meal: 'Dinner',
+      url: a,
+      meal: "Dinner",
     },
-  ];
+  ]);
+  const [newImage, setnewImage] = useState([]) ;
 
   const [isAdmin, setIsAdmin] = useState(() => {
     console.log(JSON.parse(localStorage.getItem("cred")).admin);
@@ -55,157 +56,225 @@ const Coupons = () => {
   });
 
   useEffect(() => {
-    setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin)
-  }, [])
-  
+    setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin);
+  }, []);
 
   const [formData, setFormData] = useState({
-    mealOneS: '',
-    mealOneE: '',
-    mealTwoS: '',
-    mealTwoE: '',
-    mealThreeS: '',
-    mealThreeE: '',
-    mealFourS: '',
-    mealFourE: '',
+    mealOneS: "",
+    mealOneE: "",
+    mealTwoS: "",
+    mealTwoE: "",
+    mealThreeS: "",
+    mealThreeE: "",
+    mealFourS: "",
+    mealFourE: "",
   });
 
   const handleInputChange = (meal, timeType, value) => {
-    setFormData(prevData => ({
+    setFormData((prevData) => ({
       ...prevData,
       [`${meal}${timeType}`]: value,
     }));
   };
 
-  const generateJSON = async() => {
-    const mid = 'operation/admin/set-time/' ;
-    const email = JSON.parse(localStorage.getItem("cred")).email ;
-    const response = await postAPIcalls(mid, email, formData) ;
-    if(response.status===200){
+  const generateJSON = async () => {
+    const mid = "operation/admin/set-time/";
+    const email = JSON.parse(localStorage.getItem("cred")).email;
+    const response = await postAPIcalls(mid, email, formData);
+    if (response.status === 200) {
       console.log("good");
-    }else{
+    } else {
       console.log("bad");
     }
   };
 
+  const fetching = async () => {
+    const mid = "operation/student/get-my-qr/";
+    const email = JSON.parse(localStorage.getItem("cred")).email;
+    try {
+      const response = await getAPIcalls(mid, email);
+      // console.log(response.data);
+      if (response.status === 200) {
+        console.log("changing");
+        // setimages([]) ;
+        await setnewImage([
+          {
+            url: response.data.qrCode1.code,
+            meal: "Breakfast",
+          },
+          {
+            url: response.data.qrCode2.code,
+            meal: "Lunch",
+          },
+          {
+            url: response.data.qrCode3.code,
+            meal: "Snacks",
+          },
+          {
+            url: response.data.qrCode4.code,
+            meal: "Dinner",
+          },
+        ]) ;
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 401) {
+        console.log("ritik is bad");
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (isAdmin === false) {
+      fetching();
+    }
+  }, [isAdmin]);
+
   const handleTest = () => {
     console.log(localStorage.getItem(cred));
-  }
+  };
 
   return (
-
     <div className="flex h-screen overflow-hidden pb-4">
       <SideNavbar />
       <div className="flex flex-col flex-1 lg:overflow-hidden">
         <Navbar />
         <div className="flex-1  overflow-y-auto bg-gray-200 py-16 px-4 ">
-          <div className='text-right text-3xl font-bold mx-4 lg:mb-0 mb-16'>
-            <div >Your Coupons</div>
+          <div className="text-right text-3xl font-bold mx-4 lg:mb-0 mb-16">
+            <div>Your Coupons</div>
           </div>
-          {isAdmin===true ?
-            (
-              
+          {isAdmin === true ? (
             <div>
-              <div className='text-2xl font-bold mb-8'>Generate Meal</div>
-              <div className='flex justify-center items-center text px-8 '>
+              <div className="text-2xl font-bold mb-8">Generate Meal</div>
+              <div className="flex justify-center items-center text px-8 ">
                 <form action="">
                   <div className="grid grid-cols-1 items-center">
-                    <label className='text-xl font-bold'>Breakfast</label>
-                    <div className='grid grid-cols-2 gap-24'>
+                    <label className="text-xl font-bold">Breakfast</label>
+                    <div className="grid grid-cols-2 gap-24">
                       <div>
-                        <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
+                        <label htmlFor="mealOneS" className="mb-2">
+                          Select start time:
+                        </label>
                         <input
                           type="time"
                           id="mealOneS"
                           name="mealOneS"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealOne', 'S', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealOne", "S", e.target.value)
+                          }
                         />
                       </div>
                       <div>
-                        <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
+                        <label htmlFor="mealOneE" className="mb-2">
+                          Select end time:
+                        </label>
                         <input
                           type="time"
                           id="mealOneE"
                           name="mealOneE"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealOne', 'E', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealOne", "E", e.target.value)
+                          }
                         />
                       </div>
                     </div>
 
-                    <label className='text-xl font-bold'>Lunch</label>
-                    <div className='grid grid-cols-2 gap-24'>
+                    <label className="text-xl font-bold">Lunch</label>
+                    <div className="grid grid-cols-2 gap-24">
                       <div>
-                        <label htmlFor="mealTwoS" className="mb-2">Select start time:</label>
+                        <label htmlFor="mealTwoS" className="mb-2">
+                          Select start time:
+                        </label>
                         <input
                           type="time"
                           id="mealTwoS"
                           name="mealTwoS"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealTwo', 'S', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealTwo", "S", e.target.value)
+                          }
                         />
                       </div>
                       <div>
-                        <label htmlFor="mealTwoE" className="mb-2">Select end time:</label>
+                        <label htmlFor="mealTwoE" className="mb-2">
+                          Select end time:
+                        </label>
                         <input
                           type="time"
                           id="mealTwoE"
                           name="mealTwoE"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealTwo', 'E', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealTwo", "E", e.target.value)
+                          }
                         />
                       </div>
                     </div>
 
-                    <label className='text-xl font-bold'>Snacks</label>
-                    <div className='grid grid-cols-2 gap-24'>
+                    <label className="text-xl font-bold">Snacks</label>
+                    <div className="grid grid-cols-2 gap-24">
                       <div>
-                        <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
+                        <label htmlFor="mealOneS" className="mb-2">
+                          Select start time:
+                        </label>
                         <input
                           type="time"
                           id="mealOneS"
                           name="mealOneS"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealThree', 'S', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealThree", "S", e.target.value)
+                          }
                         />
                       </div>
                       <div>
-                        <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
+                        <label htmlFor="mealOneE" className="mb-2">
+                          Select end time:
+                        </label>
                         <input
                           type="time"
                           id="mealOneE"
                           name="mealOneE"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealThree', 'E', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealThree", "E", e.target.value)
+                          }
                         />
                       </div>
                     </div>
 
-                    <label className='text-xl font-bold'>Dinner</label>
-                    <div className='grid grid-cols-2 gap-24'>
+                    <label className="text-xl font-bold">Dinner</label>
+                    <div className="grid grid-cols-2 gap-24">
                       <div>
-                        <label htmlFor="mealOneS" className="mb-2">Select start time:</label>
+                        <label htmlFor="mealOneS" className="mb-2">
+                          Select start time:
+                        </label>
                         <input
                           type="time"
                           id="mealOneS"
                           name="mealOneS"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealFour', 'S', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealFour", "S", e.target.value)
+                          }
                         />
                       </div>
                       <div>
-                        <label htmlFor="mealOneE" className="mb-2">Select end time:</label>
+                        <label htmlFor="mealOneE" className="mb-2">
+                          Select end time:
+                        </label>
                         <input
                           type="time"
                           id="mealOneE"
                           name="mealOneE"
                           className="border p-2 mb-4"
-                          onChange={(e) => handleInputChange('mealFour', 'E', e.target.value)}
+                          onChange={(e) =>
+                            handleInputChange("mealFour", "E", e.target.value)
+                          }
                         />
                       </div>
                     </div>
-
 
                     {/* Repeat similar structure for mealThree and mealFour sections */}
 
@@ -220,34 +289,13 @@ const Coupons = () => {
                 </form>
               </div>
             </div>
-            )
-            :
-
-            (<CouponSlider
-              images={[
-                {
-                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-                  meal: 'Breakfast',
-                },
-                {
-                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-                  meal: 'Lunch',
-                },
-                {
-                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-                  meal: 'Snacks',
-                },
-                {
-                  url: 'https://pngimg.com/uploads/qr_code/qr_code_PNG25.png',
-                  meal: 'Dinner',
-                },
-              ]}
-            />)
-
-
-          }
+          ) : (
+            <CouponSlider
+              // images={newImage.length==0?images:newImage}
+              images={newImage}
+            />
+          )}
         </div>
-
       </div>
     </div>
   );
