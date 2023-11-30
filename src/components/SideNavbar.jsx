@@ -74,7 +74,7 @@ export const SideNavbar = () => {
     return (
         <div className=" shadow-lg bg-white text-left  justify-between  px-2 rounded-lg w-72 border-solid border-1 border-black hidden lg:block h-full m-2 ">
             <div className="text-center">
-                <div className="text-2xl mb-10">Secure Meal</div>
+                <div className="text-2xl mb-6 mt-4">Mess Guardian</div>
                 <div>
                     {navlinks.map((d, i) => (
                         <Link
