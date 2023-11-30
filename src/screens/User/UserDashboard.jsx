@@ -5,6 +5,7 @@ import SideNavbar from "../../components/SideNavbar";
 import { LuUserCircle2 } from "react-icons/lu";
 import QrCodeScanner from "../../components/QrCodeScanner";
 import Loading from "../../components/Loading";
+import Close from "../../components/close";
 
 
 const UserDashboard = () => {
@@ -18,6 +19,11 @@ const UserDashboard = () => {
   const closeScanQrCodePopup = () => {
     setScanQrCodePopupOpen(false);
   };
+
+//   const toggleScanQrCodePopup = () => {
+//     setScanQrCodePopupOpen(!isScanQrCodePopupOpen);
+//   };
+
 
     const [isAdmin, setIsAdmin] = useState(JSON.parse(localStorage.getItem("cred")).admin);
 
@@ -73,7 +79,7 @@ const UserDashboard = () => {
                                 >
                                     <div className="w-full h-full p-4 flex flex-col justify-center items-center">
                                         {/* Your popup content goes here */}
-                                        <QrCodeScanner />
+                                        <QrCodeScanner/>
                                         {/* Add your QR code scanning logic or any other content */}
                                         {/* <button
                                             className="px-4 py-2 rounded mt-4 bg-red-400 text-white hover:bg-red-500 focus:ring-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 "
@@ -81,6 +87,10 @@ const UserDashboard = () => {
                                         >
                                             Close Popup
                                         </button> */}
+                                        <div onClick={closeScanQrCodePopup}>
+                                        <Close />
+                                        </div>
+                                        
                                     </div>
                                 </Popup>
                             </div>

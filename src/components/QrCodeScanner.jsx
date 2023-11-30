@@ -91,7 +91,8 @@ const QrCodeScanner = () => {
         )}
       </div>
       <Loading />
-      <Close />
+      
+      
     </div>
   );
 };
