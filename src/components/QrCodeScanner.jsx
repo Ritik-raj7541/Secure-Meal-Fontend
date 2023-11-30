@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import QrReader from "react-web-qr-reader";
 import Button from "./Button";
 import { postAPIcalls } from "../utils/apiCalls";
+import Loading from "./Loading";
+import Close from "./close";
 
 const QrCodeScanner = () => {
   const containerStyle = {
@@ -88,7 +90,8 @@ const QrCodeScanner = () => {
           />
         )}
       </div>
-      <p>Scanning...</p>
+      <Loading />
+      <Close />
     </div>
   );
 };
