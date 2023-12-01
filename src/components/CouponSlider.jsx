@@ -43,7 +43,7 @@ export default function ImageSlider({ images }) {
     }, []);
 
     return (
-        <div className="w-full -z-50 grid grid-cols-1 place-items-center ">
+        <div className="w-full -z-50 grid grid-cols-1 place-items-center lg:mt-20 mt-10" >
             {/* Slider */}
             {
                 (images.length == 0) ?

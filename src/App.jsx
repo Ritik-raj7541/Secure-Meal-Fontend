@@ -11,6 +11,7 @@ import Contacts from './screens/User/Contacts';
 import PopupBox from './components/PopupBox';
 import Home from './screens/Home';
 import Reviews from './screens/Reviews';
+import Profile from './screens/User/Profile';
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
       <Route exact path="/user-dashboard" Component={UserDashboard} ></Route>
       <Route exact path="/admin-dashboard" Component={AdminDashboard} ></Route>
       <Route exact path="/reviews" Component={Reviews} ></Route>
+      <Route exact path="/profile" Component={Profile} ></Route>
 
     </Routes>
       

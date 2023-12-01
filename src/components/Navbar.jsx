@@ -10,6 +10,7 @@ import { FaNotEqual } from "react-icons/fa6";
 import { TiContacts } from "react-icons/ti";
 import { RiHome2Line } from "react-icons/ri";
 import { MdOutlineRateReview } from "react-icons/md";
+import { FaRegCircleUser } from "react-icons/fa6";
 import {
   HomeIcon,
   UserCircleIcon,
@@ -33,6 +34,11 @@ export const Navbar = () => {
             label: "Dashboard",
             link: "/user-dashboard",
             icon: <RiHome2Line className="text-xl mx-2" />,
+        },
+        {
+            label: "Profile",
+            link: "/profile",
+            icon: <FaRegCircleUser />
         },
         {
             label: "Coupons",
@@ -85,7 +91,7 @@ export const Navbar = () => {
     return (
         <div className="px-3 py-3 lg:py-2  w-full bg-stone-100  fixed lg:z-0 z-50">
             
-            <nav className="flex justify-between " >
+            <nav className="flex  " >
             <HiOutlineMenuAlt1
                             onClick={() => setMenu(true)}
                             className="text-3xl cursor-pointer lg:hidden"
@@ -100,7 +106,7 @@ export const Navbar = () => {
                       }
                 >
                     
-                    <div className=" shadow-lg bg-white text-left  justify-between  px-2 rounded-lg w-72 border-solid border-1 border-black block  h-full">
+                    <div className=" shadow-lg bg-white   justify-between  px-2 rounded-lg w-72 border-solid border-1 border-black block  h-full">
                     <div className="text-center">
                     <HiOutlineMenuAlt1 onClick={() => setMenu(false)} className="relative z-50 flex items-center cursor-pointer text-3xl left-60" />
                         <div className="text-2xl mb-10">Mess Guardian</div>
@@ -123,21 +129,21 @@ export const Navbar = () => {
                                 </Link>
                             ))}
                         </div>
-                        <Button value="Logout" onClick={handleLogout}/>
+                        <button
+                      className="bg-red-400 text-white px-4 py-2 mx-2 mt-16 rounded-md"
+                      onClick={handleLogout }
+                    >Logout</button>
                     </div>
                 </div>
                 </div>
 
                 {/* last section */}
                 <section className="flex items-center gap-4 justify-right">
-                    {/* cart icon */}
-                    {/* <LuUserCircle2  className="text-3xl" /> */}
+                   
                     <DropdownMenu />
 
-                    {/* avtar img */}
                 </section>
             </nav>
-            {/* Conditionally render the horizontal line */}
             {false && <hr className=" " />}
         </div>
     );
