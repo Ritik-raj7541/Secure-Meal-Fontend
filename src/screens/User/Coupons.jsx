@@ -9,27 +9,29 @@ import SideNavbar from "../../components/SideNavbar";
 import TimePicker from "react-time-picker";
 import { getAPIcalls, postAPIcalls } from "../../utils/apiCalls";
 import a from '../../assets/pics/a.png'
+import Close from "../../components/close";
+import Popup from "reactjs-popup";
 
 const Coupons = () => {
-  const breakfast = () => {
-    console.log(event.target.value);
-  };
+  // const breakfast = () => {
+  //   console.log(event.target.value);
+  // };
 
-  const lunch = () => {
-    console.log(event.target.value);
-  };
+  // const lunch = () => {
+  //   console.log(event.target.value);
+  // };
 
-  const snacks = () => {
-    console.log(event.target.value);
-  };
+  // const snacks = () => {
+  //   console.log(event.target.value);
+  // };
 
-  const dinner = () => {
-    console.log(event.target.value);
-  };
+  // const dinner = () => {
+  //   console.log(event.target.value);
+  // };
 
-  const generate = () => {
-    console.log(event.target.value);
-  };
+  // const generate = () => {
+  //   console.log(event.target.value);
+  // };
   
   const [newImage, setnewImage] = useState([{}]) ;
 
@@ -66,6 +68,7 @@ const Coupons = () => {
     const response = await postAPIcalls(mid, email, formData);
     if (response.status === 200) {
       console.log("good");
+      openScanQrCodePopup();
     } else {
       console.log("bad");
     }
@@ -115,6 +118,16 @@ const Coupons = () => {
   const handleTest = () => {
     console.log(localStorage.getItem(cred));
   };
+
+  const [isScanQrCodePopupOpen, setScanQrCodePopupOpen] = useState(false);
+
+    const openScanQrCodePopup = () => {
+        setScanQrCodePopupOpen(true);
+    };
+
+    const closeScanQrCodePopup = () => {
+        setScanQrCodePopupOpen(false);
+    };
 
   return (
     <div className="flex h-screen overflow-hidden pb-4">
@@ -260,6 +273,29 @@ const Coupons = () => {
                     </div>
 
                     {/* Repeat similar structure for mealThree and mealFour sections */}
+
+                    <Popup
+                                    open={isScanQrCodePopupOpen}
+                                    onClose={closeScanQrCodePopup}
+                                    modal
+                                    contentStyle={{
+                                        width: "80%",
+                                        maxHeight: "80%",
+                                        margin: "auto",
+                                        padding: 0,
+                                        borderRadius: "8px",
+                                        boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
+                                        backgroundColor: "#fff",
+                                        overflow: "hidden",
+                                    }}
+                                >
+                                    <div className="w-full h-full p-4 flex flex-col justify-center items-center">
+                                      <div>Coupons generated successfully!</div>
+                                      <div onClick={closeScanQrCodePopup}>
+                                            <Close />
+                                        </div>
+                                    </div>
+                                </Popup>
 
                     <button
                       type="button"

@@ -38,7 +38,7 @@ export const Navbar = () => {
         {
             label: "Profile",
             link: "/profile",
-            icon: <FaRegCircleUser />
+            icon: <FaRegCircleUser className="text-xl mx-2"/>
         },
         {
             label: "Coupons",

@@ -12,6 +12,14 @@ const Complains = () => {
     date: '',
     complain: '',
   });
+  const [isAdmin, setIsAdmin] = useState(() => {
+    console.log(JSON.parse(localStorage.getItem("cred")).admin);
+    JSON.parse(localStorage.getItem("cred")).admin;
+  });
+
+  useEffect(() => {
+    setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin);
+  }, []);
 
   const inputRef = useRef(null);
 
@@ -143,7 +151,10 @@ const Complains = () => {
           <div className="text-right mx-4 mb-8 lg:mb-4 font-bold">
             <div className="text-3xl">Complains</div>
           </div>
-          <Button value="Having some issues?" className="bg-red-400 text-white hover:bg-red-500 focus:ring-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2" onClick={openModal} />
+          {
+            isAdmin ? <div className='text-2xl font-bold'> Complains of Students</div> :
+            <Button value="Having some issues?" className="bg-red-400 text-white hover:bg-red-500 focus:ring-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2" onClick={openModal} />
+          }
           <div>
             {yourComplains.map((obj, index) => (
               <div key={obj.date} onClick={() => openReviewModal(obj)} className="w-full rounded-lg shadow-sm text-left p-4 bg-white mt-4">
