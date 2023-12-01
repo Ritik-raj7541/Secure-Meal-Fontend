@@ -174,8 +174,8 @@ const Login = () => {
             <div
               class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
               <div>
-                <h1 class="text-white font-bold text-4xl font-sans">Secure Meal</h1>
-                <p class="text-white mt-1">Enjoy</p>
+                <h1 class="text-white font-bold text-4xl font-sans">Mess Guardian</h1>
+                <p class="text-white mt-1">Your Mess Companion</p>
 
               </div>
               <div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
@@ -225,8 +225,8 @@ const Login = () => {
             <div
               class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
               <div>
-                <h1 class="text-white font-bold text-4xl font-sans">Secure Meal</h1>
-                <p class="text-white mt-1">Enjoy</p>
+                <h1 class="text-white font-bold text-4xl font-sans">Mess Guardian</h1>
+                <p class="text-white mt-1">Your Mess Companion</p>
 
               </div>
               <div class="absolute -bottom-32 -left-40 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>

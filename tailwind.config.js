@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'bit-bg': "url('public\bit-bg.webp')",
+        'bit-logo': "url('public\bit-logo.png')",
+      }
+    },
   },
   plugins: [],
 }

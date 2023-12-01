@@ -35,13 +35,21 @@ const UserDashboard = () => {
     }, [])
 
 
-    const [showElement,setShowElement] = React.useState(true)
-  useEffect(()=>{
-    setTimeout(function() {
-      setShowElement(false)
-         }, 3000);
-       },
-   [])
+    const [showElement, setShowElement] = React.useState(true)
+    useEffect(() => {
+        setTimeout(function () {
+            setShowElement(false)
+        }, 3000);
+    },
+        [])
+
+    // const [meal, setMeal] = useState([]);
+    const meals = [
+        {breakfast: 'omlete'},
+        {lunch: 'chawal'},
+        {snacks: 'samosa'},
+        {dinner: 'biryani'}
+    ]
 
     return (
         <div>
@@ -149,48 +157,28 @@ const UserDashboard = () => {
                                         <img src="https://pngimg.com/uploads/qr_code/qr_code_PNG25.png" />
                                     </div>
                                     <div className="shadow-md bg-gray-100 rounded-lg">
-                                        <div className="my-4">Today's Meal</div>
-                                        <ul className="text-left mx-8">
-                                            <li>
-                                                Breakfast
-                                                <ul>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                Lunch
-                                                <ul>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                Snacks
-                                                <ul>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                </ul>
-                                            </li>
-                                            <li>
-                                                Dinner
-                                                <ul>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                    <li>Idli</li>
-                                                </ul>
-                                            </li>
-
-
-                                        </ul>
+                                        <div>
+                                        <div>Breakfast:
+                                            </div>
+                                            {meals.breakfast}
                                     </div>
+                                    <div className="shadow-md bg-gray-100 rounded-lg">
+                                        <div>Lunch:
+                                            </div>
+                                            {meals.lunch}
+                                    </div>
+                                    <div className="shadow-md bg-gray-100 rounded-lg">
+                                        <div>Snacks:
+                                            </div>
+                                            {meals.snacks}
+                                    </div>
+                                    <div className="shadow-md bg-gray-100 rounded-lg">
+                                        <div>Dinner:
+                                            </div>
+                                            {meals.dinner}
+                                    </div>
+                                            </div>
+                                        
 
 
                                 </div>

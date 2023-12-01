@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { RiHome2Line } from "react-icons/ri";
 import { RiCoupon3Line } from "react-icons/ri";
 import { GiMeal } from "react-icons/gi";
-import { FaNotEqual } from "react-icons/fa6";
+import { FaNotEqual, FaRegCircleUser } from "react-icons/fa6";
 import { TiContacts } from "react-icons/ti";
 import { MdOutlineRateReview } from "react-icons/md";
 import Button from "./Button";
@@ -27,6 +27,11 @@ export const SideNavbar = () => {
             label: "Dashboard",
             link: "/user-dashboard",
             icon: <RiHome2Line className="text-xl mx-2" />,
+        },
+        {
+            label: "Profile",
+            link: "/profile",
+            icon: <FaRegCircleUser className="text-xl mx-2"/>
         },
         {
             label: "Coupons",
@@ -93,7 +98,10 @@ export const SideNavbar = () => {
                         </Link>
                     ))}
                 </div>
-                <Button value="Logout" onClick={handleLogout}/>
+                <button
+                      className="bg-red-400 text-white px-4 py-2 mx-2 mt-36 rounded-md "
+                      onClick={handleLogout}
+                    >Logout</button>
             </div>
         </div>
 
