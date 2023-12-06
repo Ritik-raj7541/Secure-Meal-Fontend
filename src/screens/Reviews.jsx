@@ -4,6 +4,7 @@ import SideNavbar from '../components/SideNavbar';
 import Button from '../components/Button';
 import ReviewModal from '../components/ReviewModal';
 import StarRating from '../components/StarRating';
+import { getAPIcalls, postAPIcalls } from '../utils/apiCalls';
 
 const Reviews = () => {
     const [showModal, setShowModal] = useState(false);
@@ -80,78 +81,92 @@ const Reviews = () => {
             "ratings": "⭐"
         }
     ]
-
-    const allReviews = [
-        {
-            "meal": "Admin-Breakfast",
-            "date": "28/11/2023",
-            "review": "The breakfast options were delicious and satisfying. I especially enjoyed the variety and freshness of the food. The service was prompt, and the overall experience was fantastic.",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Breakfast",
-            "date": "28/11/2023",
-            "review": "The breakfast options were delicious and satisfying. I especially enjoyed the variety and freshness of the food. The service was prompt, and the overall experience was fantastic.",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Lunch",
-            "date": "28/11/2023",
-            "review": "Lunch was a delightful experience. The flavors were well-balanced, and the portions were generous. The staff was courteous, creating a pleasant atmosphere. Highly recommended!",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Dinner",
-            "date": "28/11/2023",
-            "review": "Dinner exceeded my expectations. The dishes were flavorful and beautifully presented. The ambiance was lovely, making it a perfect dining experience.",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Snacks",
-            "date": "28/11/2023",
-            "review": "The snacks were a delightful treat. A perfect combination of sweet and savory options. The quality of ingredients was evident, and I thoroughly enjoyed my snack time.",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Breakfast",
-            "date": "29/11/2023",
-            "review": "Another wonderful breakfast experience. The freshness of ingredients and the attention to detail make this place stand out. I look forward to starting my day here.",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Lunch",
-            "date": "29/11/2023",
-            "review": "Lunch was disappointing. The food lacked flavor, and the service was slow. Not recommended for a pleasant lunch experience.",
-            "ratings": "⭐"
-        },
-        {
-            "meal": "Dinner",
-            "date": "29/11/2023",
-            "review": "Dinner was a gastronomic journey. The diverse menu and impeccable flavors make this place a standout choice for an evening meal. Highly recommended for food enthusiasts.",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Snacks",
-            "date": "29/11/2023",
-            "review": "The snacks were underwhelming. The flavors were not as expected, and the variety was limited. Disappointed with the snack options.",
-            "ratings": "⭐"
-        },
-        {
-            "meal": "Breakfast",
-            "date": "30/11/2023",
-            "review": "Yet another fantastic breakfast. The consistency in quality and the friendly staff make this place my go-to for a satisfying morning meal.",
-            "ratings": "⭐⭐⭐⭐⭐"
-        },
-        {
-            "meal": "Lunch",
-            "date": "30/11/2023",
-            "review": "Lunch was mediocre. The food was average, and the service could be improved. Not the best choice for a satisfying lunch experience.",
-            "ratings": "⭐"
-        }
-    ]
+    const [allReviews, setallReviews] = useState([]) ;
+    // const allReviews = [
+    //     {
+    //         "meal": "Admin-Breakfast",
+    //         "date": "28/11/2023",
+    //         "review": "The breakfast options were delicious and satisfying. I especially enjoyed the variety and freshness of the food. The service was prompt, and the overall experience was fantastic.",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Breakfast",
+    //         "date": "28/11/2023",
+    //         "review": "The breakfast options were delicious and satisfying. I especially enjoyed the variety and freshness of the food. The service was prompt, and the overall experience was fantastic.",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Lunch",
+    //         "date": "28/11/2023",
+    //         "review": "Lunch was a delightful experience. The flavors were well-balanced, and the portions were generous. The staff was courteous, creating a pleasant atmosphere. Highly recommended!",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Dinner",
+    //         "date": "28/11/2023",
+    //         "review": "Dinner exceeded my expectations. The dishes were flavorful and beautifully presented. The ambiance was lovely, making it a perfect dining experience.",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Snacks",
+    //         "date": "28/11/2023",
+    //         "review": "The snacks were a delightful treat. A perfect combination of sweet and savory options. The quality of ingredients was evident, and I thoroughly enjoyed my snack time.",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Breakfast",
+    //         "date": "29/11/2023",
+    //         "review": "Another wonderful breakfast experience. The freshness of ingredients and the attention to detail make this place stand out. I look forward to starting my day here.",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Lunch",
+    //         "date": "29/11/2023",
+    //         "review": "Lunch was disappointing. The food lacked flavor, and the service was slow. Not recommended for a pleasant lunch experience.",
+    //         "ratings": "⭐"
+    //     },
+    //     {
+    //         "meal": "Dinner",
+    //         "date": "29/11/2023",
+    //         "review": "Dinner was a gastronomic journey. The diverse menu and impeccable flavors make this place a standout choice for an evening meal. Highly recommended for food enthusiasts.",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Snacks",
+    //         "date": "29/11/2023",
+    //         "review": "The snacks were underwhelming. The flavors were not as expected, and the variety was limited. Disappointed with the snack options.",
+    //         "ratings": "⭐"
+    //     },
+    //     {
+    //         "meal": "Breakfast",
+    //         "date": "30/11/2023",
+    //         "review": "Yet another fantastic breakfast. The consistency in quality and the friendly staff make this place my go-to for a satisfying morning meal.",
+    //         "ratings": "⭐⭐⭐⭐⭐"
+    //     },
+    //     {
+    //         "meal": "Lunch",
+    //         "date": "30/11/2023",
+    //         "review": "Lunch was mediocre. The food was average, and the service could be improved. Not the best choice for a satisfying lunch experience.",
+    //         "ratings": "⭐"
+    //     }
+    // ]
 
     const reviews = isAdmin ? allReviews : userReviews;
+    const fetching = async() =>{
+        try {
+            const email = ''; 
+            const mid = 'operation/admin/get-review'
+            const response = await getAPIcalls(mid, email) ;
+            console.log(response.data);
+            if(response.status === 200){
+                setallReviews(response.data) ;
+            }
+        } catch (error) {
+            
+        }
+    } ;
     useEffect(() => {
+        fetching() ;
         setIsAdmin(JSON.parse(localStorage.getItem("cred")).admin);
         setNewreview(reviews);
     }, [])
@@ -189,9 +204,19 @@ const Reviews = () => {
 
     };
 
-    const handleAddreview = () => {
+    const handleAddreview = async() => {
         // Add validation logic if needed
         // reviews.push(newreview);
+        const mid = 'operation/student/write-review/' ;
+        const mail =JSON.parse(localStorage.getItem("cred")).email ;
+        try {
+            const response = await postAPIcalls(mid, mail, newreview) ;
+            if(response.status === 200){
+                console.log("written");
+            }
+        } catch (error) {
+            
+        }
         closeModal();
         console.log(newreview);
     };
