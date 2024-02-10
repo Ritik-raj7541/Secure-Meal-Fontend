@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import QrReader from "react-web-qr-reader";
+import {QrReader} from "react-qr-reader";
 import Button from "./Button";
 import { postAPIcalls } from "../utils/apiCalls";
 import Loading from "./Loading";
