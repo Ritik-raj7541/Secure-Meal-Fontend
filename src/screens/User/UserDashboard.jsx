@@ -61,7 +61,7 @@ const UserDashboard = () => {
                             <Navbar />
                             <div className="flex-1 overflow-y-auto bg-gray-200 py-14 ">
                                 <div className="text-left mx-4 ">
-                                    <div className="text-2xl">Aditya Marandi</div>
+                                    <div className="text-2xl">{JSON.parse(localStorage.getItem("cred")).name}</div>
                                 </div>
 
                                 <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 px-4 mt-2 ">
@@ -129,8 +129,8 @@ const UserDashboard = () => {
                             <Navbar />
                             <div className="flex-1  overflow-y-auto bg-gray-200 py-16  ">
                                 <div className="text-right mx-4 ">
-                                    <div className="text-3xl font-bold">Aditya Marandi</div>
-                                    <div className="">BTECH/10035/20</div>
+                                    <div className="text-3xl font-bold">{JSON.parse(localStorage.getItem("cred")).name}</div>
+                                    <div className="">{JSON.parse(localStorage.getItem("cred")).roll}</div>
                                 </div>
 
                                 <div className="grid lg:grid-cols-3 grid-cols-1 gap-4 px-4 mt-2 ">
