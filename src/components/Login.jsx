@@ -46,7 +46,6 @@ const Login = () => {
     } catch (error) {
       if (error.response.status === 401) {
         setRegistrationError(1);
-        console.log("Ritik chutiya");
       }
     }
   };
@@ -70,7 +69,6 @@ const Login = () => {
     } catch (error) {
       if (error.response.status === 401) {
         setRegistrationError(1);
-        console.log("RItik chutiya");
       }
     }
     // console.log(credentials);
@@ -117,7 +115,6 @@ const Login = () => {
     } catch (error) {
       if (error.response && error.response.status === 401) {
         setCorrectCredentials(false);
-        console.log("ritik is bad");
       }
     }
       //not login successfully     
@@ -151,7 +148,8 @@ const Login = () => {
     e.preventDefault();
     // Add authentication logic here (not implemented in this example)
     const hostel = username.substring(0, 5);
-    if (hostel.toLowerCase() === 'btech') {
+    const branch = username.substring(2,3) ;
+    if (hostel.toLowerCase() === 'btech' || branch !== '@') {
       userLogin();
     }
     else {
