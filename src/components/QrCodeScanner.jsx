@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {QrReader} from "react-qr-reader";
+import QrReader from "react-web-qr-reader";
 import Button from "./Button";
 import { postAPIcalls } from "../utils/apiCalls";
 import Loading from "./Loading";
@@ -29,8 +29,6 @@ const QrCodeScanner = (closeScanQrCodePopup) => {
   const [showCheck, setShowCheck] = useState(false);
   const [showCross, setShowCross] = useState(false);
 
-
-
   const setting = async () => {
     const data = JSON.parse(result.data);
     setCredentials(data);
@@ -42,7 +40,6 @@ const QrCodeScanner = (closeScanQrCodePopup) => {
     try {
       const response = await postAPIcalls(mid, useremail, credentials);
       if (response.status === 200) {
-
         setShowCheck(true);
         closeScanQrCodePopup();
       }
@@ -52,7 +49,6 @@ const QrCodeScanner = (closeScanQrCodePopup) => {
           setShowCross(true);
           closeScanQrCodePopup();
         }
-
       }
     }
   };
@@ -92,43 +88,37 @@ const QrCodeScanner = (closeScanQrCodePopup) => {
   return (
     <div className="lg:h-1/2 h-full w-full " style={containerStyle}>
       <div style={previewStyle}>
-
-        {
-          showCheck ?
-            <div className="text-center justify-center">
-              <div className="flex items-center flex-col"> {/* Added container */}
-                <Check className="justify-center" />
-                <div className="text-green-500"> Your Coupon is successfully verified!</div>
+        {showCheck ? (
+          <div className="text-center justify-center">
+            <div className="flex items-center flex-col">
+              {" "}
+              {/* Added container */}
+              <Check className="justify-center" />
+              <div className="text-green-500">
+                {" "}
+                Your Coupon is successfully verified!
               </div>
             </div>
-
-            :
-
-            showCross ?
-              <div className="text-center">
-                Your Coupon has been used or Expired!
-              </div> :
-              <div className="justify-center">
-                <QrReader
-                  delay={delay}
-                  style={{ width: "100%", height: "100%" }}
-                  onError={handleError}
-                  onScan={handleScan}
-                  constraints={{
-                    facingMode: "environment",
-                  }}
-                />
-                <Loading />
-              </div>
-
-
-
-        }
-
-
+          </div>
+        ) : showCross ? (
+          <div className="text-center">
+            Your Coupon has been used or Expired!
+          </div>
+        ) : (
+          <div className="justify-center">
+            <QrReader
+              delay={delay}
+              style={{ width: "100%", height: "100%" }}
+              onError={handleError}
+              onScan={handleScan}
+              constraints={{
+                facingMode: "environment",
+              }}
+            />
+            <Loading />
+          </div>
+        )}
       </div>
-
-
     </div>
   );
 };
